@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Scrp. — Priced in minutes. Paid in full.</title>
+<meta name="description" content="Scrp buys fine watches, loose links and parts, old gold, designer bags and luxury pens — in any condition, across the UAE. Priced in minutes, paid in full.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo+Narrow:wght@600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --linen: #F5F1E8;      /* main ground */
+    --shell: #EBE6D9;      /* alternate section */
+    --sage:  #DCDCD0;      /* image placeholder / third tone */
+    --dark:  #2B2A24;      /* footer & fills — warm near-black */
+    --ink:   #1E1D18;      /* text */
+    --grey:  #6E6A5E;      /* secondary text */
+    --rule:  #C9C3B4;
+    --gold:  #A8842C;
+    --serif: 'Times New Roman', Times, Georgia, serif;
+    --sans:  'Archivo Narrow', 'Arial Narrow', Arial, sans-serif;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    * { transition: none !important; }
+  }
+
+  body {
+    background: var(--linen);
+    color: var(--ink);
+    font-family: var(--serif);
+    font-size: 1.1rem;
+    line-height: 1.6;
+  }
+
+  a { color: inherit; }
+  a:focus-visible, button:focus-visible { outline: 2px solid var(--gold); outline-offset: 3px; }
+
+  .wrap { max-width: 78rem; margin: 0 auto; padding: 0 1.5rem; }
+
+  /* ---------- buttons, Aesop-style ---------- */
+  .btn {
+    display: inline-block;
+    font-family: var(--sans);
+    font-weight: 600;
+    font-size: 1rem;
+    letter-spacing: 0.02em;
+    text-decoration: none;
+    color: var(--ink);
+    background: transparent;
+    border: 1px solid var(--ink);
+    padding: 0.85rem 1.75rem;
+    transition: background 0.2s ease, color 0.2s ease;
+  }
+  .btn:hover { background: var(--ink); color: var(--linen); }
+  .btn.solid { background: var(--ink); color: var(--linen); }
+  .btn.solid:hover { background: var(--gold); border-color: var(--gold); }
+  .btn.light { color: var(--linen); border-color: var(--linen); }
+  .btn.light:hover { background: var(--linen); color: var(--ink); }
+
+  /* ---------- header ---------- */
+  header {
+    padding: 1.4rem 0;
+    border-bottom: 1px solid var(--rule);
+    background: var(--linen);
+    position: sticky;
+    top: 0;
+    z-index: 10;
+  }
+  header .wrap { display: flex; align-items: baseline; justify-content: space-between; }
+  .mark { font-family: var(--serif); font-size: 1.6rem; line-height: 1; text-decoration: none; letter-spacing: -0.01em; }
+  .mark em { font-style: italic; }
+  header nav a {
+    font-family: var(--sans); font-weight: 600; font-size: 0.95rem;
+    text-decoration: none; margin-left: 1.6rem;
+  }
+  header nav a:hover { color: var(--gold); }
+  @media (max-width: 40rem) { header nav a:not(.keep) { display: none; } }
+
+  /* ---------- photo slots ---------- */
+  .ph {
+    position: relative;
+    background: var(--sage);
+    overflow: hidden;
+  }
+  .ph img {
+    position: absolute; inset: 0;
+    width: 100%; height: 100%;
+    object-fit: cover;
+  }
+  .ph .cap {
+    position: absolute; inset: 0;
+    display: grid; place-items: center;
+    font-style: italic; color: var(--grey);
+    font-size: 0.95rem; text-align: center; padding: 1rem;
+  }
+
+  /* ---------- hero: split panel over image ---------- */
+  .hero { display: grid; grid-template-columns: minmax(0, 44%) minmax(0, 56%); min-height: 88vh; }
+  @media (max-width: 56rem) { .hero { grid-template-columns: 1fr; min-height: 0; } }
+  .hero .panel {
+    display: flex; flex-direction: column; justify-content: center;
+    padding: 5rem 3.5rem;
+  }
+  @media (max-width: 56rem) { .hero .panel { padding: 4rem 1.5rem; } }
+  .hero h1 { font-weight: 400; font-size: clamp(4rem, 9vw, 7rem); line-height: 0.95; letter-spacing: -0.02em; }
+  .hero h1 em { font-style: italic; }
+  .hero .tagline {
+    font-family: var(--sans); font-weight: 700;
+    font-size: clamp(1rem, 2vw, 1.25rem);
+    margin-top: 1.1rem;
+  }
+  .hero p.sub { margin-top: 1.6rem; max-width: 26rem; color: var(--grey); }
+  .hero .actions { margin-top: 2.25rem; }
+  .hero .note { font-family: var(--sans); font-weight: 600; font-size: 0.9rem; color: var(--grey); margin-top: 0.8rem; }
+  .hero .ph { min-height: 60vh; }
+  @media (max-width: 56rem) { .hero .ph { min-height: 46vh; } }
+
+  /* ---------- intro line ---------- */
+  .intro { background: var(--shell); border-top: 1px solid var(--rule); border-bottom: 1px solid var(--rule); }
+  .intro .wrap { padding: 5rem 1.5rem; }
+  .intro p { font-size: clamp(1.5rem, 3.4vw, 2.3rem); line-height: 1.3; max-width: 52rem; }
+  .intro p em { font-style: italic; }
+
+  /* ---------- category features: image / text pairs ---------- */
+  .feature { display: grid; grid-template-columns: 1fr 1fr; }
+  @media (max-width: 56rem) { .feature { grid-template-columns: 1fr; } }
+  .feature .ph { min-height: 34rem; }
+  @media (max-width: 56rem) { .feature .ph { min-height: 22rem; } }
+  .feature .text {
+    display: flex; flex-direction: column; justify-content: center;
+    padding: 5rem 4rem;
+  }
+  @media (max-width: 56rem) { .feature .text { padding: 3.5rem 1.5rem; } }
+  .feature.alt { background: var(--shell); }
+  .feature h2 { font-weight: 400; font-size: clamp(1.9rem, 3.5vw, 2.6rem); line-height: 1.15; }
+  .feature h2 em { font-style: italic; }
+  .feature .text > p { margin-top: 1.25rem; max-width: 30rem; color: var(--grey); }
+  .feature ul {
+    list-style: none; margin-top: 1.75rem; max-width: 30rem;
+  }
+  .feature li {
+    display: flex; justify-content: space-between; align-items: baseline;
+    gap: 1rem;
+    padding: 0.7rem 0;
+    border-top: 1px solid var(--rule);
+  }
+  .feature li:last-child { border-bottom: 1px solid var(--rule); }
+  .feature li .yes { font-style: italic; color: var(--gold); white-space: nowrap; }
+  .feature .text .btn { align-self: flex-start; margin-top: 2rem; }
+
+  /* ---------- how it works ---------- */
+  .how { background: var(--dark); color: var(--linen); }
+  .how .wrap { padding: 5.5rem 1.5rem; }
+  .how h2 { font-family: var(--sans); font-weight: 600; font-size: 1rem; margin-bottom: 2.5rem; color: var(--sage); }
+  .how ol {
+    list-style: none; counter-reset: step;
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: 3rem;
+  }
+  @media (max-width: 48rem) { .how ol { grid-template-columns: 1fr; gap: 2.25rem; } }
+  .how li { counter-increment: step; }
+  .how li::before {
+    content: counter(step) ".";
+    display: block; font-style: italic; font-size: 2.25rem; line-height: 1;
+    margin-bottom: 0.75rem; color: var(--gold);
+  }
+  .how li strong { display: block; font-weight: 400; font-size: 1.35rem; margin-bottom: 0.4rem; }
+  .how li p { color: #B9B4A5; font-size: 1rem; }
+  .how .actions { margin-top: 3rem; }
+
+  /* ---------- assurances ---------- */
+  .assure .wrap { padding: 5.5rem 1.5rem; }
+  .assure dl { display: grid; grid-template-columns: repeat(3, 1fr); gap: 3rem; }
+  @media (max-width: 48rem) { .assure dl { grid-template-columns: 1fr; gap: 2rem; } }
+  .assure dt { font-size: 1.35rem; margin-bottom: 0.4rem; }
+  .assure dt em { font-style: italic; }
+  .assure dd { color: var(--grey); font-size: 1rem; }
+
+  /* ---------- closing ---------- */
+  .closing { background: var(--shell); border-top: 1px solid var(--rule); }
+  .closing .wrap { padding: 6rem 1.5rem; }
+  .closing p.big { font-size: clamp(1.9rem, 5vw, 3rem); line-height: 1.15; max-width: 40rem; }
+  .closing p.big em { font-style: italic; }
+  .closing .btn { margin-top: 2.25rem; }
+
+  /* ---------- footer ---------- */
+  footer { background: var(--dark); color: var(--linen); }
+  footer .wrap {
+    padding: 3rem 1.5rem 3.5rem;
+    display: flex; flex-wrap: wrap; gap: 1.25rem 3rem;
+    justify-content: space-between; align-items: baseline;
+  }
+  footer .mark { font-size: 1.4rem; }
+  footer ul { list-style: none; display: flex; flex-wrap: wrap; gap: 1.5rem; font-family: var(--sans); font-weight: 600; font-size: 0.95rem; }
+  footer ul a { text-decoration: none; }
+  footer ul a:hover { color: var(--gold); }
+  footer p.legal { width: 100%; color: #8D897B; font-size: 0.9rem; margin-top: 0.75rem; }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap">
+    <a class="mark" href="#top">S<em>crp.</em></a>
+    <nav>
+      <a href="#watches">Watches &amp; parts</a>
+      <a href="#gold">Gold</a>
+      <a href="#bags">Bags &amp; pens</a>
+      <a class="keep" href="https://wa.me/971500000000">WhatsApp</a>
+    </nav>
+  </div>
+</header>
+
+<main id="top">
+
+  <section class="hero">
+    <div class="panel">
+      <h1>S<em>crp.</em></h1>
+      <p class="tagline">Priced in minutes. Paid in full.</p>
+      <p class="sub">We buy fine watches, loose links and parts, old gold, designer bags and luxury pens — in any condition, across the UAE.</p>
+      <div class="actions">
+        <a class="btn solid" href="https://wa.me/971500000000">Get a price on WhatsApp</a>
+        <p class="note">Send photos. No appointment needed.</p>
+      </div>
+    </div>
+    <div class="ph">
+      <span class="cap">Hero photo — watch dial &amp; bracelet macro, warm light<br>images/hero.jpg</span>
+      <img src="images/hero.jpg" alt="Close detail of a fine watch dial and bracelet" onerror="this.remove()">
+    </div>
+  </section>
+
+  <section class="intro">
+    <div class="wrap">
+      <p>Most buyers only want it complete, running and boxed. We take a longer view — the broken watch, the loose links, the gold nobody wears. Each piece has a value, and we'll tell you <em>exactly what it is.</em></p>
+    </div>
+  </section>
+
+  <section class="feature" id="watches">
+    <div class="ph">
+      <span class="cap">Loose bracelet links arranged on linen, overhead macro<br>images/links.jpg</span>
+      <img src="images/links.jpg" alt="Loose watch bracelet links arranged on linen" onerror="this.remove()">
+    </div>
+    <div class="text">
+      <h2>Watches, links <em>&amp; parts</em></h2>
+      <p>Running or not. A complete Rolex or a single link from one. Movements, dials, bezels and crowns hold real value to the right hands — ours.</p>
+      <ul>
+        <li>Fine watches, running and complete <span class="yes">Yes.</span></li>
+        <li>Broken and water-damaged watches <span class="yes">Yes.</span></li>
+        <li>Single links and part bracelets <span class="yes">Yes.</span></li>
+        <li>Movements, dials and components <span class="yes">Yes.</span></li>
+      </ul>
+      <a class="btn" href="https://wa.me/971500000000">Price my watch</a>
+    </div>
+  </section>
+
+  <section class="feature alt" id="gold">
+    <div class="text">
+      <h2>Old gold <em>&amp; jewellery</em></h2>
+      <p>Any karat, any condition. Snapped chains, single earrings, pieces out of fashion. Priced on weight, against the live market rate — shown to you as we weigh it.</p>
+      <ul>
+        <li>Gold in any karat and condition <span class="yes">Yes.</span></li>
+        <li>Broken chains and odd pieces <span class="yes">Yes.</span></li>
+        <li>Fine jewellery and diamonds <span class="yes">Yes.</span></li>
+      </ul>
+      <a class="btn" href="https://wa.me/971500000000">Price my gold</a>
+    </div>
+    <div class="ph">
+      <span class="cap">Coiled gold chains on dark stone, soft side light<br>images/gold.jpg</span>
+      <img src="images/gold.jpg" alt="Gold chains coiled on dark stone" onerror="this.remove()">
+    </div>
+  </section>
+
+  <section class="feature" id="bags">
+    <div class="ph">
+      <span class="cap">Bag hardware &amp; pen nib still life, muted tones<br>images/bags-pens.jpg</span>
+      <img src="images/bags-pens.jpg" alt="Designer bag hardware and a fountain pen nib" onerror="this.remove()">
+    </div>
+    <div class="text">
+      <h2>Bags <em>&amp; pens</em></h2>
+      <p>Designer bags with a life behind them — worn corners and missing straps included. And the Montblanc in the drawer, even if it dried out years ago.</p>
+      <ul>
+        <li>Designer bags, any condition <span class="yes">Yes.</span></li>
+        <li>Luxury pens and writing sets <span class="yes">Yes.</span></li>
+      </ul>
+      <a class="btn" href="https://wa.me/971500000000">Price my pieces</a>
+    </div>
+  </section>
+
+  <section class="how" id="how">
+    <div class="wrap">
+      <h2>How it works</h2>
+      <ol>
+        <li>
+          <strong>Send photos on WhatsApp</strong>
+          <p>Everything you have, in one message. A phone photo is enough to start.</p>
+        </li>
+        <li>
+          <strong>Get a price in minutes</strong>
+          <p>A clear number for each piece, and what it's based on. No obligation.</p>
+        </li>
+        <li>
+          <strong>Get paid in full</strong>
+          <p>Meet us or we come to you. Bank transfer or cash, same day, with a receipt.</p>
+        </li>
+      </ol>
+      <div class="actions">
+        <a class="btn light" href="https://wa.me/971500000000">Start with a photo</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="assure">
+    <div class="wrap">
+      <dl>
+        <div>
+          <dt>We say <em>yes</em></dt>
+          <dd>Broken, incomplete and unloved pieces have value. We price everything you bring, not just the easy sales.</dd>
+        </div>
+        <div>
+          <dt>Real prices</dt>
+          <dd>Gold follows the live market. Watches and bags are priced against what they actually sell for.</dd>
+        </div>
+        <div>
+          <dt>Done properly</dt>
+          <dd>Every purchase documented — ID, receipt and instant payment. Your details stay private.</dd>
+        </div>
+      </dl>
+    </div>
+  </section>
+
+  <section class="closing">
+    <div class="wrap">
+      <p class="big">Not sure it counts? Send a photo anyway. Pricing costs nothing, and you're never obliged to sell.</p>
+      <a class="btn solid" href="https://wa.me/971500000000">Get a price on WhatsApp</a>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <a class="mark" href="#top">S<em>crp.</em></a>
+    <ul>
+      <li><a href="https://wa.me/971500000000">WhatsApp</a></li>
+      <li><a href="mailto:hello@scrp.ae">hello@scrp.ae</a></li>
+      <li><a href="https://instagram.com/">Instagram</a></li>
+    </ul>
+    <p class="legal">Scrp — United Arab Emirates. Priced in minutes. Paid in full.</p>
+  </div>
+</footer>
+
+</body>
+</html>
