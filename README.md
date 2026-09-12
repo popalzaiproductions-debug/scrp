@@ -62,7 +62,7 @@ The phone breakpoint is 40rem; sections stop sitting side by side at 56rem.
 
 ## Before going live
 
-- [ ] Point the Instagram link at the real profile.
+- [x] Instagram points at [@scrp_ae](https://instagram.com/scrp_ae).
 - [ ] Confirm `hello@scrp.ae` is receiving mail.
 - [x] WhatsApp number set to `971505693732` (9 links, including the phone bar).
 - [ ] Replace the photographs with owned or licensed images.
