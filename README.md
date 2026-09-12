@@ -9,7 +9,8 @@ designer bags and luxury pens, in any condition, across the UAE.
 
 ## Structure
 
-Single page, no build step, no dependencies beyond one Google font.
+Single page, no build step, no dependencies beyond one Google font. Laid out
+phone-first — the desktop view is the same markup widened.
 
 - `index.html` — the entire site. CSS is inline in the `<head>`.
 - `images/` — the four section photographs.
@@ -44,11 +45,26 @@ edges crop away at narrow widths and the hero crops hard on mobile. Aim for
 > previewing the design, but replace them with your own shoot or properly
 > licensed images before this is promoted as a live business site.
 
+## Phone layout
+
+The phone breakpoint is 40rem; sections stop sitting side by side at 56rem.
+
+- Every section reads **photo then text**. The gold section is reversed in the
+  source so it zigzags on desktop, which on a phone dropped its photo flush
+  against the next section's photo — the AP bracelet butting straight into the
+  pen. `.feature.alt .ph` gets `order: -1` under 56rem to prevent it.
+- Buttons go full width at 40rem, about 62px tall, sized for thumbs.
+- A fixed WhatsApp bar sits at the bottom of the viewport under 40rem so the
+  one action that matters is always in reach. `body` carries matching bottom
+  padding so it never covers the footer.
+- `section[id]` has `scroll-margin-top` so the sticky header doesn't cover a
+  heading when a nav link is tapped.
+
 ## Before going live
 
-- [ ] Replace the placeholder WhatsApp number `971500000000` (7 occurrences).
 - [ ] Point the Instagram link at the real profile.
 - [ ] Confirm `hello@scrp.ae` is receiving mail.
+- [x] WhatsApp number set to `971505693732` (9 links, including the phone bar).
 - [ ] Replace the photographs with owned or licensed images.
 
 ## Palette

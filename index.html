@@ -24,7 +24,7 @@
 
   * { margin: 0; padding: 0; box-sizing: border-box; }
 
-  html { scroll-behavior: smooth; }
+  html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
   @media (prefers-reduced-motion: reduce) {
     html { scroll-behavior: auto; }
     * { transition: none !important; }
@@ -42,6 +42,9 @@
   a:focus-visible, button:focus-visible { outline: 2px solid var(--gold); outline-offset: 3px; }
 
   .wrap { max-width: 78rem; margin: 0 auto; padding: 0 1.5rem; }
+
+  /* in-page links must clear the sticky header */
+  section[id] { scroll-margin-top: 4.75rem; }
 
   /* ---------- buttons, Aesop-style ---------- */
   .btn {
@@ -62,6 +65,13 @@
   .btn.solid:hover { background: var(--gold); border-color: var(--gold); }
   .btn.light { color: var(--linen); border-color: var(--linen); }
   .btn.light:hover { background: var(--linen); color: var(--ink); }
+  /* phone: full-width, thumb-sized buttons */
+  @media (max-width: 40rem) {
+    .btn {
+      display: block; width: 100%; text-align: center;
+      padding: 1.05rem 1.5rem; font-size: 1.05rem;
+    }
+  }
 
   /* ---------- header ---------- */
   header {
@@ -138,6 +148,10 @@
   }
   @media (max-width: 56rem) { .feature .text { padding: 3.5rem 1.5rem; } }
   .feature.alt { background: var(--shell); }
+  /* Stacked, every section reads photo then text. Without this the reversed
+     gold section puts its photo last, landing it flush against the next
+     section's photo — two images touching with no copy between them. */
+  @media (max-width: 56rem) { .feature.alt .ph { order: -1; } }
   .feature h2 { font-weight: 400; font-size: clamp(1.9rem, 3.5vw, 2.6rem); line-height: 1.15; }
   .feature h2 em { font-style: italic; }
   .feature .text > p { margin-top: 1.25rem; max-width: 30rem; color: var(--grey); }
@@ -200,6 +214,36 @@
   footer ul a { text-decoration: none; }
   footer ul a:hover { color: var(--gold); }
   footer p.legal { width: 100%; color: #8D897B; font-size: 0.9rem; margin-top: 0.75rem; }
+
+  /* ---------- phone: tighter rhythm ---------- */
+  @media (max-width: 40rem) {
+    .hero .panel { padding: 3rem 1.5rem 3.5rem; }
+    .intro .wrap { padding: 3.25rem 1.5rem; }
+    .feature .text { padding: 2.75rem 1.5rem; }
+    .how .wrap, .assure .wrap { padding: 3.5rem 1.5rem; }
+    .closing .wrap { padding: 3.75rem 1.5rem; }
+    footer .wrap { padding: 2.5rem 1.5rem 3rem; }
+  }
+
+  /* ---------- phone: WhatsApp stays within reach ---------- */
+  .callbar { display: none; }
+  @media (max-width: 40rem) {
+    .callbar {
+      display: block;
+      position: fixed; left: 0; right: 0; bottom: 0; z-index: 20;
+      background: var(--dark);
+      padding: 0.7rem 1rem calc(0.7rem + env(safe-area-inset-bottom));
+    }
+    .callbar a {
+      display: block; text-align: center; text-decoration: none;
+      font-family: var(--sans); font-weight: 700; font-size: 1.05rem;
+      letter-spacing: 0.02em;
+      background: var(--linen); color: var(--ink);
+      padding: 0.9rem 1rem;
+    }
+    /* clear the bar so it never covers the footer */
+    body { padding-bottom: 5.25rem; }
+  }
 </style>
 </head>
 <body>
@@ -211,7 +255,7 @@
       <a href="#watches">Watches &amp; parts</a>
       <a href="#gold">Gold</a>
       <a href="#bags">Bags &amp; pens</a>
-      <a class="keep" href="https://wa.me/971500000000">WhatsApp</a>
+      <a class="keep" href="https://wa.me/971505693732">WhatsApp</a>
     </nav>
   </div>
 </header>
@@ -224,7 +268,7 @@
       <p class="tagline">Priced in minutes. Paid in full.</p>
       <p class="sub">We buy fine watches, loose links and parts, old gold, designer bags and luxury pens — in any condition, across the UAE.</p>
       <div class="actions">
-        <a class="btn solid" href="https://wa.me/971500000000">Get a price on WhatsApp</a>
+        <a class="btn solid" href="https://wa.me/971505693732">Get a price on WhatsApp</a>
         <p class="note">Send photos. No appointment needed.</p>
       </div>
     </div>
@@ -254,7 +298,7 @@
         <li>Single links and part bracelets <span class="yes">Yes.</span></li>
         <li>Movements, dials and components <span class="yes">Yes.</span></li>
       </ul>
-      <a class="btn" href="https://wa.me/971500000000">Price my watch</a>
+      <a class="btn" href="https://wa.me/971505693732">Price my watch</a>
     </div>
   </section>
 
@@ -267,7 +311,7 @@
         <li>Broken chains and odd pieces <span class="yes">Yes.</span></li>
         <li>Fine jewellery and diamonds <span class="yes">Yes.</span></li>
       </ul>
-      <a class="btn" href="https://wa.me/971500000000">Price my gold</a>
+      <a class="btn" href="https://wa.me/971505693732">Price my gold</a>
     </div>
     <div class="ph">
       <span class="cap">Coiled gold chains on dark stone, soft side light<br>images/gold.jpg</span>
@@ -287,7 +331,7 @@
         <li>Designer bags, any condition <span class="yes">Yes.</span></li>
         <li>Luxury pens and writing sets <span class="yes">Yes.</span></li>
       </ul>
-      <a class="btn" href="https://wa.me/971500000000">Price my pieces</a>
+      <a class="btn" href="https://wa.me/971505693732">Price my pieces</a>
     </div>
   </section>
 
@@ -309,7 +353,7 @@
         </li>
       </ol>
       <div class="actions">
-        <a class="btn light" href="https://wa.me/971500000000">Start with a photo</a>
+        <a class="btn light" href="https://wa.me/971505693732">Start with a photo</a>
       </div>
     </div>
   </section>
@@ -336,7 +380,7 @@
   <section class="closing">
     <div class="wrap">
       <p class="big">Not sure it counts? Send a photo anyway. Pricing costs nothing, and you're never obliged to sell.</p>
-      <a class="btn solid" href="https://wa.me/971500000000">Get a price on WhatsApp</a>
+      <a class="btn solid" href="https://wa.me/971505693732">Get a price on WhatsApp</a>
     </div>
   </section>
 
@@ -346,13 +390,17 @@
   <div class="wrap">
     <a class="mark" href="#top">S<em>crp.</em></a>
     <ul>
-      <li><a href="https://wa.me/971500000000">WhatsApp</a></li>
+      <li><a href="https://wa.me/971505693732">WhatsApp</a></li>
       <li><a href="mailto:hello@scrp.ae">hello@scrp.ae</a></li>
       <li><a href="https://instagram.com/">Instagram</a></li>
     </ul>
     <p class="legal">Scrp — United Arab Emirates. Priced in minutes. Paid in full.</p>
   </div>
 </footer>
+
+<div class="callbar">
+  <a href="https://wa.me/971505693732">Get a price on WhatsApp</a>
+</div>
 
 </body>
 </html>
